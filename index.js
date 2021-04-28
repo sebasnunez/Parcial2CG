@@ -93,6 +93,7 @@ pelota.addEventListener( 'collision', function( other_object, relative_velocity,
 
 
 
+var dirC = 0;
 function animate() {
     if(!isPaused){
         scene.simulate();
@@ -108,6 +109,25 @@ function animate() {
     }
     jugador.position.set(dir,-3,0);
     jugador.__dirtyPosition = true;
+
+    
+    if(cpu.position.x<=2.4){
+        if(cpu.position.x<pelota.position.x){
+            dirC+=0.2;
+            cpu.position.set(dirC,3,0);
+            cpu.__dirtyPosition = true;
+        }
+    }
+    if(cpu.position.x>=-2.4){
+        if(cpu.position.x>pelota.position.x){
+            dirC-=0.2;
+            cpu.position.set(dirC,3,0);
+            cpu.__dirtyPosition = true;
+        }
+    }
+    
+
+    
     controles();
     renderer.render( scene, camera );
     stats.update();
